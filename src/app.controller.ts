@@ -14,8 +14,9 @@ import {
   // JwtAuthGuard,
   BasicAuthGuard,
 } from './auth';
-import { User } from './users';
+
 import { AppRequest } from './shared';
+import { User } from './entities/User.entity';
 
 @Controller()
 export class AppController {
@@ -36,7 +37,7 @@ export class AppController {
     return this.authService.register(body);
   }
 
-  @UseGuards(LocalAuthGuard)
+  @UseGuards(BasicAuthGuard)
   @HttpCode(200)
   @Post('api/auth/login')
   async login(@Request() req: AppRequest) {
