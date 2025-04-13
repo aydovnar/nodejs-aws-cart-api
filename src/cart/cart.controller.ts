@@ -19,6 +19,7 @@ import { CartItem } from '../entities/CartItem.entity';
 import { CartStatus } from 'src/entities/Cart.entity';
 import { DataSource } from 'typeorm';
 import { Order } from '../entities/Order.entity';
+import { cart, order } from '../../shared/mocks';
 
 @Controller('api/profile/cart')
 export class CartController {
@@ -30,12 +31,12 @@ export class CartController {
 
   @UseGuards(BasicAuthGuard)
   @Get()
-  async findUserCart(@Req() req: AppRequest): Promise<CartItem[]> {
-    const cart = await this.cartService.findOrCreateByUserId(
+  findUserCart(@Req() req: AppRequest): CartItem[] {
+    /*const cart = await this.cartService.findOrCreateByUserId(
       getUserIdFromRequest(req),
-    );
+    );*/
 
-    return cart.cartItems;
+    return cart;
   }
 
   @UseGuards(BasicAuthGuard)
@@ -114,7 +115,7 @@ export class CartController {
 
   @UseGuards(BasicAuthGuard)
   @Get('order')
-  async getOrder(): Promise<Order[]> {
-    return await this.orderService.getAll();
+  getOrder(): Order[] {
+    return order;
   }
 }
